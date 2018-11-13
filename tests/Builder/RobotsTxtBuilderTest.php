@@ -19,6 +19,25 @@ class RobotsTxtBuilderTest extends TestCase
 # Header line 2
 EOT;
 
+        self::assertSame($expected, $builder->getFormatted());
+    }
+
+
+    public function testHeaderWithIndention ()
+    {
+        $builder = new RobotsTxtBuilder();
+        $builder->setHeader(<<<HEADER
+First line
+      second line
+third line
+HEADER
+        );
+
+        $expected = <<<EOT
+# First line
+#       second line
+# third line
+EOT;
 
         self::assertSame($expected, $builder->getFormatted());
     }

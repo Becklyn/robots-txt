@@ -31,7 +31,7 @@ class RobotsTxtBuilder
      */
     public function setHeader (string $header) : self
     {
-        $lines = \array_map("trim", \explode("\n", $header));
+        $lines = \array_map("rtrim", \explode("\n", $header));
         $this->header = "# " . \implode("\n# ", $lines);
         return $this;
     }
