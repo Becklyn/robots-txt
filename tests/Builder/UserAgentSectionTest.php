@@ -134,4 +134,24 @@ EOS;
         (new UserAgentSection(["*"]))
             ->allow("with\nline\nbreaks");
     }
+
+
+    public function testMultiLineComment ()
+    {
+        $actual = (new UserAgentSection(["*"]))
+            ->comment("first")
+            ->comment("second\nthird")
+            ->comment("last")
+            ->getFormatted();
+
+        $expected = <<<EOT
+# first
+# second
+# third
+# last
+User-Agent: *
+EOT;
+
+        self::assertSame($expected, $actual);
+    }
 }

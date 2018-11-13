@@ -3,6 +3,7 @@
 namespace Becklyn\RobotsTxt\Builder;
 
 use Becklyn\RobotsTxt\Builder\UserAgentSection;
+use Becklyn\RobotsTxt\Exception\InvalidSitemapUrlException;
 
 
 class RobotsTxtBuilder
@@ -28,18 +29,10 @@ class RobotsTxtBuilder
     /**
      * @param string $header
      */
-    public function __construct (string $header = "")
-    {
-        $this->setHeader($header);
-    }
-
-
-    /**
-     * @param string $header
-     */
     public function setHeader (string $header) : void
     {
-        $this->header = \trim($header);
+        $lines = \array_map("trim", \explode("\n", $header));
+        $this->header = "# " . \implode("\n# ", $lines);
     }
 
 
@@ -68,7 +61,23 @@ class RobotsTxtBuilder
      */
     public function addSitemap (string $url) : void
     {
+        if (!$this->isValidUrl($url))
+        {
+            throw new InvalidSitemapUrlException(\sprintf("Invalid sitemap URL: '%s'. The URL must not contain line breaks.", $url));
+        }
+
         $this->sitemaps[] = "Sitemap: {$url}";
+    }
+
+
+    /**
+     * @param string $url
+     * @return bool
+     */
+    private function isValidUrl (string $url) : bool
+    {
+        // just test for new line injection
+        return false === \strpos($url, "\n");
     }
 
 
@@ -77,7 +86,7 @@ class RobotsTxtBuilder
      *
      * @return string
      */
-    public function getContent () : string
+    public function getFormatted () : string
     {
         $content = "";
 
@@ -94,6 +103,6 @@ class RobotsTxtBuilder
             $this->sections
         ));
 
-        return $content;
+        return \trim($content);
     }
 }

@@ -105,7 +105,13 @@ class UserAgentSection
      */
     public function comment (string $comment) : self
     {
-        $this->comments[] = $comment;
+        $lines = \array_map("trim", \explode("\n", $comment));
+
+        foreach ($lines as $line)
+        {
+            $this->comments[] = $line;
+        }
+
         return $this;
     }
 
