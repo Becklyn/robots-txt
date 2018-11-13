@@ -89,30 +89,10 @@ EOS;
     /**
      * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
      */
-    public function testInvalidDisallowPath ()
-    {
-        (new UserAgentSection(["*"]))
-            ->disallow("invalid");
-    }
-
-
-    /**
-     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
-     */
     public function testInvalidDisallowPathWithLineBreak ()
     {
         (new UserAgentSection(["*"]))
             ->disallow("with\nline\nbreaks");
-    }
-
-
-    /**
-     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
-     */
-    public function testInvalidAllowPath ()
-    {
-        (new UserAgentSection(["*"]))
-            ->allow("invalid");
     }
 
 

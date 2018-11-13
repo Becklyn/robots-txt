@@ -85,9 +85,7 @@ class UserAgentSection
             return false;
         }
 
-        return "" !== $path
-            ? "/" === $path[0]
-            : $allowEmpty;
+        return "" !== $path || $allowEmpty;
     }
 
 
