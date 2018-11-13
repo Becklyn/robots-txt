@@ -71,7 +71,6 @@ EOS;
 
     public function testFormats ()
     {
-
         $section = new UserAgentSection(["*", "mybot/1.0"]);
         $section->disallow("/");
         $section->disallow("");
@@ -100,6 +99,16 @@ EOS;
     /**
      * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
      */
+    public function testInvalidDisallowPathWithLineBreak ()
+    {
+        (new UserAgentSection(["*"]))
+            ->disallow("with\nline\nbreaks");
+    }
+
+
+    /**
+     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
+     */
     public function testInvalidAllowPath ()
     {
         (new UserAgentSection(["*"]))
@@ -114,5 +123,15 @@ EOS;
     {
         (new UserAgentSection(["*"]))
             ->allow("");
+    }
+
+
+    /**
+     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
+     */
+    public function testInvalidDAllowPathWithLineBreak ()
+    {
+        (new UserAgentSection(["*"]))
+            ->allow("with\nline\nbreaks");
     }
 }

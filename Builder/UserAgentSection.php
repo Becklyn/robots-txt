@@ -76,6 +76,11 @@ class UserAgentSection
      */
     private function isValidPath (string $path, bool $allowEmpty) : bool
     {
+        if (false !== \strpos($path, "\n"))
+        {
+            return false;
+        }
+
         return "" !== $path
             ? "/" === $path[0]
             : $allowEmpty;
