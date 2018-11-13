@@ -1,0 +1,32 @@
+{
+    "name": "becklyn/robots-txt",
+    "type": "library",
+    "description": "A library to build robots.txt",
+    "homepage": "https://github.com/Becklyn/robots-txt",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Becklyn Studios",
+            "homepage": "https://becklyn.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "becklyn/php-cs": "^1.0.9"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Becklyn\\RobotsTxt\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Becklyn\\RobotsTxt\\": "tests/"
+        }
+    }
+}
