@@ -2,7 +2,6 @@
 
 namespace Becklyn\RobotsTxt\Builder;
 
-use Becklyn\RobotsTxt\Builder\UserAgentSection;
 use Becklyn\RobotsTxt\Exception\InvalidSitemapUrlException;
 
 
@@ -28,11 +27,13 @@ class RobotsTxtBuilder
 
     /**
      * @param string $header
+     * @return RobotsTxtBuilder
      */
-    public function setHeader (string $header) : void
+    public function setHeader (string $header) : self
     {
         $lines = \array_map("trim", \explode("\n", $header));
         $this->header = "# " . \implode("\n# ", $lines);
+        return $this;
     }
 
 
@@ -84,7 +85,7 @@ class RobotsTxtBuilder
      * @param string $url
      * @return RobotsTxtBuilder
      */
-    public function addSitemap (string $url) : void
+    public function addSitemap (string $url) : self
     {
         $url = \trim($url);
 
@@ -94,6 +95,7 @@ class RobotsTxtBuilder
         }
 
         $this->sitemaps[] = "Sitemap: {$url}";
+        return $this;
     }
 
 
