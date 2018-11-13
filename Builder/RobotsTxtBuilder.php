@@ -2,7 +2,7 @@
 
 namespace Becklyn\RobotsTxt\Builder;
 
-use Becklyn\RobotsTxt\Section\UserAgentSection;
+use Becklyn\RobotsTxt\Builder\UserAgentSection;
 
 
 class RobotsTxtBuilder

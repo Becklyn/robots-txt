@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Becklyn\RobotsTxt\Section;
+namespace Tests\Becklyn\RobotsTxt\Builder;
 
-use Becklyn\RobotsTxt\Section\UserAgentSection;
+use Becklyn\RobotsTxt\Builder\UserAgentSection;
 use PHPUnit\Framework\TestCase;
 
 

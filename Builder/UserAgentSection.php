@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Becklyn\RobotsTxt\Section;
+namespace Becklyn\RobotsTxt\Builder;
 
 use Becklyn\RobotsTxt\Exception\InvalidPathException;
 
