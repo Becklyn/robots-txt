@@ -11,7 +11,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Mobiledoc Bundle Tests">
+        <testsuite name="Robots.txt Library Tests">
             <directory>tests</directory>
             <exclude>tests/fixtures</exclude>
         </testsuite>
