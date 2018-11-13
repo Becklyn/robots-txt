@@ -41,14 +41,14 @@ class UserAgentSectionTest extends TestCase
         $section->allow("/downloads/");
         $section->comment("My comment");
 
-        $expected = <<<EOS
+        $expected = <<<EOT
 # My comment
 User-Agent: *
 Disallow: /
 Allow: /files/
 Allow: /downloads/
 Crawl-delay: 15
-EOS;
+EOT;
 
         self::assertSame($expected, $section->getFormatted());
     }
@@ -60,10 +60,10 @@ EOS;
         $section->disallow("/");
         $section->disallow("/");
 
-        $expected = <<<EOS
+        $expected = <<<EOT
 User-Agent: *
 Disallow: /
-EOS;
+EOT;
 
         self::assertSame($expected, $section->getFormatted());
     }
@@ -75,12 +75,12 @@ EOS;
         $section->disallow("/");
         $section->disallow("");
 
-        $expected = <<<EOS
+        $expected = <<<EOT
 User-Agent: *
 User-Agent: mybot/1.0
 Disallow: /
 Disallow: 
-EOS;
+EOT;
 
         self::assertSame($expected, $section->getFormatted());
     }

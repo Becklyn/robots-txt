@@ -26,11 +26,11 @@ EOT;
     public function testHeaderWithIndention ()
     {
         $builder = new RobotsTxtBuilder();
-        $builder->setHeader(<<<HEADER
+        $builder->setHeader(<<<EOT
 First line
       second line
 third line
-HEADER
+EOT
         );
 
         $expected = <<<EOT
