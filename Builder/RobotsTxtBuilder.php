@@ -43,8 +43,7 @@ class RobotsTxtBuilder
     public function getSection (...$userAgents) : UserAgentSection
     {
         $userAgents = array_map("trim", $userAgents);
-        \natsort($userAgents);
-        $hashKey = \implode(":", $userAgents);
+        $hashKey = $this->generateUserAgentsHashKey($userAgents);
 
         if (!isset($this->sections[$hashKey]))
         {
@@ -52,6 +51,32 @@ class RobotsTxtBuilder
         }
 
         return $this->sections[$hashKey];
+    }
+
+
+    /**
+     * Removes the section identified by the given user agents
+     *
+     * @param string[] ...$userAgents
+     */
+    public function removeSection (...$userAgents) : void
+    {
+        $userAgents = array_map("trim", $userAgents);
+        $hashKey = $this->generateUserAgentsHashKey($userAgents);
+        unset($this->sections[$hashKey]);
+    }
+
+
+    /**
+     * Generates the hash key for the given user agents
+     *
+     * @param array $userAgents
+     * @return string
+     */
+    private function generateUserAgentsHashKey (array $userAgents) : string
+    {
+        \natsort($userAgents);
+        return \implode(":", $userAgents);
     }
 
 

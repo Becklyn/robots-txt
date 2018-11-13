@@ -120,4 +120,15 @@ EOT;
 
         self::assertSame($expected, $builder->getFormatted());
     }
+
+
+    public function testSectionRemoval ()
+    {
+        $builder = new RobotsTxtBuilder();
+        $builder->getSection("*");
+
+        self::assertTrue("" !== $builder->getFormatted());
+        $builder->removeSection("*");
+        self::assertSame("", $builder->getFormatted());
+    }
 }
