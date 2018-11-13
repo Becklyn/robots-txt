@@ -61,6 +61,8 @@ class RobotsTxtBuilder
      */
     public function addSitemap (string $url) : void
     {
+        $url = \trim($url);
+
         if (!$this->isValidUrl($url))
         {
             throw new InvalidSitemapUrlException(\sprintf("Invalid sitemap URL: '%s'. The URL must not contain line breaks.", $url));
@@ -88,21 +90,23 @@ class RobotsTxtBuilder
      */
     public function getFormatted () : string
     {
-        $content = "";
+        $sections = [];
 
         if ("" !== $this->header)
         {
-            $content .= "{$this->header}\n\n";
+            $sections[] = $this->header;
         }
 
-        $content .= implode("\n\n", array_map(
-            function (UserAgentSection $section)
-            {
-                return (string) $section;
-            },
-            $this->sections
-        ));
+        foreach ($this->sections as $section)
+        {
+            $sections[] = $section->getFormatted();
+        }
 
-        return \trim($content);
+        if (!empty($this->sitemaps))
+        {
+            $sections[] = \implode("\n", $this->sitemaps);
+        }
+
+        return \implode("\n\n", $sections);
     }
 }

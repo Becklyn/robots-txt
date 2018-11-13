@@ -52,17 +52,72 @@ EOT;
 
         $expected = <<<EOT
 User-Agent: *
-Disallow: /
+Disallow: /admin
 
-Sitemap: https://becklyn.com/sitemap.xml 
+Sitemap: https://becklyn.com/sitemap.xml
 Sitemap: https://becklyn.com/sitemap.xml.tar.gz
 EOT;
 
+        self::assertSame($expected, $builder->getFormatted());
     }
 
 
     public function testFull ()
     {
+        $builder = new RobotsTxtBuilder();
+        $builder->getSection("*")
+            ->disallow("/admin")
+            ->allow("/public")
+            ->crawlDelay(10);
 
+        $builder->getSection("google")
+            ->disallow("/admin2")
+            ->allow("/")
+            ->crawlDelay(15);
+
+        $builder->addSitemap("https://becklyn.com/sitemap.xml");
+        $builder->addSitemap("https://becklyn.com/sitemap.xml.tar.gz");
+
+        $expected = <<<EOT
+User-Agent: *
+Disallow: /admin
+Allow: /public
+Crawl-delay: 10
+
+User-Agent: google
+Disallow: /admin2
+Allow: /
+Crawl-delay: 15
+
+Sitemap: https://becklyn.com/sitemap.xml
+Sitemap: https://becklyn.com/sitemap.xml.tar.gz
+EOT;
+
+        self::assertSame($expected, $builder->getFormatted());
+    }
+
+
+    public function testFullWithStripping ()
+    {
+        $builder = new RobotsTxtBuilder();
+        $builder->getSection("*  ")
+            ->disallow("/admin  ")
+            ->allow("/public  ")
+            ->crawlDelay(10);
+
+        $builder->addSitemap("https://becklyn.com/sitemap.xml  ");
+        $builder->addSitemap("https://becklyn.com/sitemap.xml.tar.gz  ");
+
+        $expected = <<<EOT
+User-Agent: *
+Disallow: /admin
+Allow: /public
+Crawl-delay: 10
+
+Sitemap: https://becklyn.com/sitemap.xml
+Sitemap: https://becklyn.com/sitemap.xml.tar.gz
+EOT;
+
+        self::assertSame($expected, $builder->getFormatted());
     }
 }

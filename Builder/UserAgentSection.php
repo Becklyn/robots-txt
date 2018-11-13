@@ -43,6 +43,8 @@ class UserAgentSection
      */
     public function disallow (string $path) : self
     {
+        $path = \trim($path);
+
         if (!$this->isValidPath($path, true))
         {
             throw new InvalidPathException(\sprintf("Invalid path: '%s'. Disallow path must start with a slash '/'.", $path));
@@ -60,6 +62,8 @@ class UserAgentSection
      */
     public function allow (string $path) : self
     {
+        $path = \trim($path);
+
         if (!$this->isValidPath($path, false))
         {
             throw new InvalidPathException(\sprintf("Invalid path: '%s'. Allow path must start with a slash '/' and must not be empty.", $path));
