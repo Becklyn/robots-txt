@@ -4,7 +4,6 @@ namespace Becklyn\RobotsTxt\Builder;
 
 use Becklyn\RobotsTxt\Exception\InvalidSitemapUrlException;
 
-
 class RobotsTxtBuilder
 {
     /**
@@ -26,7 +25,6 @@ class RobotsTxtBuilder
 
 
     /**
-     * @param string $header
      * @return RobotsTxtBuilder
      */
     public function setHeader (string $header) : self
@@ -39,11 +37,10 @@ class RobotsTxtBuilder
 
     /**
      * @param string[] ...$userAgents
-     * @return UserAgentSection
      */
     public function getSection (...$userAgents) : UserAgentSection
     {
-        $userAgents = array_map("trim", $userAgents);
+        $userAgents = \array_map("trim", $userAgents);
         $hashKey = $this->generateUserAgentsHashKey($userAgents);
 
         if (!isset($this->sections[$hashKey]))
@@ -62,7 +59,7 @@ class RobotsTxtBuilder
      */
     public function removeSection (...$userAgents) : void
     {
-        $userAgents = array_map("trim", $userAgents);
+        $userAgents = \array_map("trim", $userAgents);
         $hashKey = $this->generateUserAgentsHashKey($userAgents);
         unset($this->sections[$hashKey]);
     }
@@ -70,9 +67,6 @@ class RobotsTxtBuilder
 
     /**
      * Generates the hash key for the given user agents
-     *
-     * @param array $userAgents
-     * @return string
      */
     private function generateUserAgentsHashKey (array $userAgents) : string
     {
@@ -82,7 +76,6 @@ class RobotsTxtBuilder
 
 
     /**
-     * @param string $url
      * @return RobotsTxtBuilder
      */
     public function addSitemap (string $url) : self
@@ -100,8 +93,6 @@ class RobotsTxtBuilder
 
 
     /**
-     * @param string $url
-     * @return bool
      */
     private function isValidUrl (string $url) : bool
     {
@@ -112,8 +103,6 @@ class RobotsTxtBuilder
 
     /**
      * Renders the robots.txt to a string
-     *
-     * @return string
      */
     public function getFormatted () : string
     {
