@@ -3,6 +3,7 @@
 namespace Tests\Becklyn\RobotsTxt\Builder;
 
 use Becklyn\RobotsTxt\Builder\UserAgentSection;
+use Becklyn\RobotsTxt\Exception\InvalidPathException;
 use PHPUnit\Framework\TestCase;
 
 
@@ -87,30 +88,36 @@ EOT;
 
 
     /**
-     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
+     *
      */
     public function testInvalidDisallowPathWithLineBreak ()
     {
+        $this->expectException(InvalidPathException::class);
+
         (new UserAgentSection(["*"]))
             ->disallow("with\nline\nbreaks");
     }
 
 
     /**
-     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
+     *
      */
     public function testInvalidEmptyAllowPath ()
     {
+        $this->expectException(InvalidPathException::class);
+
         (new UserAgentSection(["*"]))
             ->allow("");
     }
 
 
     /**
-     * @expectedException Becklyn\RobotsTxt\Exception\InvalidPathException
+     *
      */
     public function testInvalidDAllowPathWithLineBreak ()
     {
+        $this->expectException(InvalidPathException::class);
+
         (new UserAgentSection(["*"]))
             ->allow("with\nline\nbreaks");
     }

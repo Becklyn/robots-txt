@@ -2,8 +2,6 @@
 
 namespace Becklyn\RobotsTxt\Exception;
 
-
 class InvalidPathException extends RobotsTxtException
 {
-
 }

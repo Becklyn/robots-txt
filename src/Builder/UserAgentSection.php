@@ -4,7 +4,6 @@ namespace Becklyn\RobotsTxt\Builder;
 
 use Becklyn\RobotsTxt\Exception\InvalidPathException;
 
-
 class UserAgentSection
 {
     /**
@@ -26,7 +25,6 @@ class UserAgentSection
 
 
     /**
-     *
      * @param string[] $userAgents
      */
     public function __construct (array $userAgents)
@@ -38,7 +36,6 @@ class UserAgentSection
     /**
      * Adds a "Disallow" directive
      *
-     * @param string $path
      * @return UserAgentSection
      */
     public function disallow (string $path) : self
@@ -57,7 +54,6 @@ class UserAgentSection
     /**
      * Adds a "Allow" directive
      *
-     * @param string $path
      * @return UserAgentSection
      */
     public function allow (string $path) : self
@@ -74,9 +70,6 @@ class UserAgentSection
 
 
     /**
-     * @param string $path
-     * @param bool   $allowEmpty
-     * @return bool
      */
     private function isValidPath (string $path, bool $allowEmpty) : bool
     {
@@ -92,7 +85,6 @@ class UserAgentSection
     /**
      * Adds a "Crawl-delay" directive
      *
-     * @param int $delay
      * @return UserAgentSection
      */
     public function crawlDelay (int $delay) : self
@@ -102,7 +94,6 @@ class UserAgentSection
 
 
     /**
-     * @param string $comment
      * @return UserAgentSection
      */
     public function comment (string $comment) : self
@@ -121,8 +112,6 @@ class UserAgentSection
     /**
      * Adds a single rule
      *
-     * @param string $type
-     * @param string $rule
      * @return UserAgentSection
      */
     private function addRule (string $type, string $rule) : self
@@ -134,8 +123,6 @@ class UserAgentSection
 
     /**
      * Renders this section
-     *
-     * @return string
      */
     public function getFormatted () : string
     {
@@ -159,12 +146,11 @@ class UserAgentSection
             }
         }
 
-        return implode("\n", $lines);
+        return \implode("\n", $lines);
     }
 
 
     /**
-     * @return string
      */
     public function __toString () : string
     {
