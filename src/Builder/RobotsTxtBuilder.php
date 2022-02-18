@@ -6,27 +6,13 @@ use Becklyn\RobotsTxt\Exception\InvalidSitemapUrlException;
 
 class RobotsTxtBuilder
 {
-    /**
-     * @var UserAgentSection[]
-     */
-    private $sections = [];
+    /** @var UserAgentSection[] */
+    private array $sections = [];
+    /** @var string[] */
+    private array $sitemaps = [];
+    private string $header = "";
 
 
-    /**
-     * @var string[]
-     */
-    private $sitemaps = [];
-
-
-    /**
-     * @var string
-     */
-    private $header = "";
-
-
-    /**
-     * @return RobotsTxtBuilder
-     */
     public function setHeader (string $header) : self
     {
         $lines = \array_map("rtrim", \explode("\n", $header));
@@ -35,10 +21,7 @@ class RobotsTxtBuilder
     }
 
 
-    /**
-     * @param string[] ...$userAgents
-     */
-    public function getSection (...$userAgents) : UserAgentSection
+    public function getSection (string ...$userAgents) : UserAgentSection
     {
         $userAgents = \array_map("trim", $userAgents);
         $hashKey = $this->generateUserAgentsHashKey($userAgents);
@@ -54,10 +37,8 @@ class RobotsTxtBuilder
 
     /**
      * Removes the section identified by the given user agents
-     *
-     * @param string[] ...$userAgents
      */
-    public function removeSection (...$userAgents) : void
+    public function removeSection (string ...$userAgents) : void
     {
         $userAgents = \array_map("trim", $userAgents);
         $hashKey = $this->generateUserAgentsHashKey($userAgents);
@@ -75,9 +56,6 @@ class RobotsTxtBuilder
     }
 
 
-    /**
-     * @return RobotsTxtBuilder
-     */
     public function addSitemap (string $url) : self
     {
         $url = \trim($url);
@@ -92,8 +70,6 @@ class RobotsTxtBuilder
     }
 
 
-    /**
-     */
     private function isValidUrl (string $url) : bool
     {
         // just test for new line injection

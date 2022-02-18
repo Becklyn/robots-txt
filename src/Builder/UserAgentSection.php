@@ -6,22 +6,12 @@ use Becklyn\RobotsTxt\Exception\InvalidPathException;
 
 class UserAgentSection
 {
-    /**
-     * @var string[]
-     */
-    private $userAgents;
-
-
-    /**
-     * @var string[][]
-     */
-    private $rules = [];
-
-
-    /**
-     * @var string[]
-     */
-    private $comments = [];
+    /** @var string[] */
+    private array $userAgents;
+    /** @var string[][] */
+    private array $rules = [];
+    /** @var string[] */
+    private array $comments = [];
 
 
     /**
